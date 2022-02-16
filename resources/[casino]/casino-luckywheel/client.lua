@@ -115,7 +115,7 @@ RegisterNetEvent("luckywheel:client:startWheel", function()
 		if HasItem then
 			TriggerServerEvent("luckywheel:getwheel")
 		else
-			QBCore.Functions.Notify('You are not a V.I.P of the casino', 'error', 3500)
+			QBCore.Functions.Notify('Du er ikke en V.I.P medlem!', 'error', 3500)
 		end
 	end, "casino_vip")
 end)
@@ -279,7 +279,7 @@ RegisterNetEvent("dojLuckywheel:winCar", function()
 		SetEntityHeading(veh, coords.h)
 		TaskWarpPedIntoVehicle(PlayerPedId(), veh, -1)
 		SetVehicleEngineOn(veh, true, true) 
-		QBCore.Functions.Notify("YOU WON THE SHOW CAR! Dodge Challenger SRT Demon!", "primary", 3500)
+		QBCore.Functions.Notify("DU VAND UDSTILLINGSBILEN!", "primary", 3500)
 	end, coords, true)            
 end)
 

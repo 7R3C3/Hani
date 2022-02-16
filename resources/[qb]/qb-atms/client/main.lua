@@ -52,7 +52,7 @@ RegisterNetEvent('qb-atms:client:loadATM', function(cards)
                 local obj = GetClosestObjectOfType(playerCoords.x, playerCoords.y, playerCoords.z, 2.0, hash, false, false, false)
                 local atmCoords = GetEntityCoords(obj, false)
                     PlayATMAnimation('enter')
-                QBCore.Functions.Progressbar("accessing_atm", "Accessing ATM", 1500, false, true, {
+                QBCore.Functions.Progressbar("accessing_atm", "Åbner atm maskinen", 1500, false, true, {
                     disableMovement = false,
                     disableCarMovement = false,
                     disableMouse = false,
@@ -64,12 +64,12 @@ RegisterNetEvent('qb-atms:client:loadATM', function(cards)
                         cards = cards,
                     })
                 end, function()
-                    QBCore.Functions.Notify("Failed!", "error")
+                    QBCore.Functions.Notify("Fejl!", "error")
                 end)
             end
         end
     else
-        QBCore.Functions.Notify("Please visit a branch to order a card", "error")
+        QBCore.Functions.Notify("Besøg venligst en filial for at bestille et kort", "error")
     end
 end)
 
@@ -124,9 +124,9 @@ RegisterNUICallback("removeCard", function(data, cb)
             SendNUIMessage({
                 status = "closeATM"
             })
-            QBCore.Functions.Notify('Card has been deleted.', 'success')
+            QBCore.Functions.Notify('Kortet er blevet slettet.', 'success')
         else
-            QBCore.Functions.Notify('Failed to delete card.', 'error')
+            QBCore.Functions.Notify('Kortet kunne ikke slettes.', 'error')
         end
     end, data)
 end)

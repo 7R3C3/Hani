@@ -42,11 +42,11 @@ function tryTakeChips(source,amount)
                 TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items['casino_blackchip'], "remove", amount) 
                 return true
 			else
-                TriggerClientEvent('QBCore:Notify', source, 'You dont have enough black chips', 'error')
+                TriggerClientEvent('QBCore:Notify', source, 'Du har ikke nok sorte chips', 'error')
                 return false
 			end
 		else
-            TriggerClientEvent('QBCore:Notify', source, 'You dont have any black chips', 'error')
+            TriggerClientEvent('QBCore:Notify', source, 'Du har ingen sorte chips', 'error')
 			return false
 		end
     end
@@ -60,7 +60,7 @@ function giveChips(source,amount)
         if Player.Functions.AddItem('casino_blackchip', amount, nil, {["quality"] = 100}) then
             TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items["casino_blackchip"], "add", amount)
         else
-            TriggerClientEvent('QBCore:Notify', source, 'You have to much in your pockets', 'error')
+            TriggerClientEvent('QBCore:Notify', source, 'Du har for meget i lommerne', 'error')
         end
     end
 end
@@ -97,7 +97,7 @@ AddEventHandler("Blackjack:requestSitAtBlackjackTable", function(chairId)
         TriggerClientEvent("Blackjack:sendBlackjackTableData",-1,blackjackTables)
         TriggerClientEvent("Blackjack:sitAtBlackjackTable",source,chairId)
     else
-        TriggerClientEvent('QBCore:Notify', source, 'cant sit you down.', 'error')
+        TriggerClientEvent('QBCore:Notify', source, 'kan ikke sætte dig ned.', 'error')
     end
 end)
 
@@ -136,7 +136,7 @@ AddEventHandler("Blackjack:setBlackjackBet",function(gameId,betAmount,chairId)
                         ----print("GameId: " .. tostring(gameId) .. " source: " .. tostring(source) .. " has placed a bet of " .. tostring(betAmount))
                         TriggerClientEvent("Blackjack:successBlackjackBet",source)
                         TriggerClientEvent("Blackjack:syncChipsPropBlackjack",-1,betAmount,chairId)
-                        TriggerClientEvent('QBCore:Notify', source, 'Bet placed: ' .. tostring(betAmount) .. ' chips.', 'success')
+                        TriggerClientEvent('QBCore:Notify', source, 'Indsats placeret: ' .. tostring(betAmount) .. ' chips.', 'success')
 
                     -- else 
                     --     TriggerClientEvent('QBCore:Notify', source, 'Not enough chips!', 'error')
@@ -146,7 +146,7 @@ AddEventHandler("Blackjack:setBlackjackBet",function(gameId,betAmount,chairId)
             end
         end
     else
-        TriggerClientEvent('QBCore:Notify', source, 'Error betting!', 'error')
+        TriggerClientEvent('QBCore:Notify', source, 'Fejl ved væddemål!', 'error')
 
     end
 end)
@@ -294,9 +294,9 @@ for i=0,31,1 do
                                                     nextCardCount = 0
                                                     blackjackGameData[gameId][source]["status"] = "bust"
                                                     local lostAmount = blackjackGameData[gameId][source][1]
-                                                    TriggerClientEvent('QBCore:Notify', source, 'Lost -'..tostring(lostAmount).." chips", 'error')
+                                                    TriggerClientEvent('QBCore:Notify', source, 'tabt -'..tostring(lostAmount).." chips", 'error')
                                                     if lostAmount > 10000000 then
-                                                        TriggerClientEvent('chatMessage', -1, "Diamond Casino | " .. GetPlayerName(source) .. " has LOST " .. tostring(getMoneyStringFormatted(lostAmount)) .. " chips!")
+                                                        TriggerClientEvent('chatMessage', -1, "Diamond Casino | " .. GetPlayerName(source) .. " har tabt " .. tostring(getMoneyStringFormatted(lostAmount)) .. " chips!")
                                                     end
                                                 elseif currentHand < 21 then
                                                     ----print("currentHand < 21")
@@ -405,7 +405,7 @@ for i=0,31,1 do
                                                     if playerPing ~= nil then
                                                         if playerPing > 0 then
                                                             TriggerClientEvent("Blackjack:blackjackWin",source,tableId)
-                                                            TriggerClientEvent('QBCore:Notify', source, 'You have BLACKJACK! +'..tostring(potentialWinAmount)..' chips', 'success')
+                                                            TriggerClientEvent('QBCore:Notify', source, 'Du har BLACKJACK! +'..tostring(potentialWinAmount)..' chips', 'success')
                                                             if potentialPushAmount > 10000000 then
                                                                 TriggerClientEvent('chatMessage', -1, "Diamond Casino | " .. GetPlayerName(source) .. " has WON " .. tostring(getMoneyStringFormatted(potentialPushAmount)) .. " chips!")
                                                             end
@@ -418,7 +418,7 @@ for i=0,31,1 do
                                                     if playerPing ~= nil then
                                                         if playerPing > 0 then
                                                             TriggerClientEvent("Blackjack:blackjackWin",source,tableId)
-                                                            TriggerClientEvent('QBCore:Notify', source, 'You have BLACKJACK! +'..tostring(potentialWinAmount)..' chips', 'success')
+                                                            TriggerClientEvent('QBCore:Notify', source, 'Du har BLACKJACK! +'..tostring(potentialWinAmount)..' chips', 'success')
                                                             if potentialPushAmount > 10000000 then
                                                                 TriggerClientEvent('chatMessage', -1, "Diamond Casino | " .. GetPlayerName(source) .. " has WON " .. tostring(getMoneyStringFormatted(potentialPushAmount)) .. " chips!")
                                                             end
@@ -430,7 +430,7 @@ for i=0,31,1 do
                                                     if playerPing ~= nil then
                                                         if playerPing > 0 then
                                                             TriggerClientEvent("Blackjack:blackjackPush",source,tableId)
-                                                            TriggerClientEvent('QBCore:Notify', source, 'You pushed!', 'error')
+                                                            TriggerClientEvent('QBCore:Notify', source, 'Du skubbede!', 'error')
                                                         end
                                                     end
                                                 else
@@ -440,7 +440,7 @@ for i=0,31,1 do
                                                             TriggerClientEvent("Blackjack:blackjackLose",source,tableId)
                                                             TriggerClientEvent('QBCore:Notify', source, 'You lost! -'..tostring(potentialPushAmount)..' chips', 'error')
                                                             if potentialPushAmount > 10000000 then
-                                                                TriggerClientEvent('chatMessage', -1, "Diamond Casino | " .. GetPlayerName(source) .. " has LOST " .. tostring(getMoneyStringFormatted(potentialPushAmount)) .. " chips!")
+                                                                TriggerClientEvent('chatMessage', -1, "Diamond Casino | " .. GetPlayerName(source) .. " har tabt " .. tostring(getMoneyStringFormatted(potentialPushAmount)) .. " chips!")
                                                             end
                                                         end
                                                     end

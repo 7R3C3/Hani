@@ -53,14 +53,14 @@ RegisterNetEvent('doj:casinoinsideTrackHeader', function()
             isMenuHeader = true,
         },
         {
-            header = "Start Horse Betting", 
+            header = "Start hestevæddemål", 
             txt = "100 red casino chips",
             params = {
                 event = "QBCore:client:openInsideTrack",
             }
         },
         {
-            header = "Cancel",
+            header = "annuler",
 			txt = "",
 			params = {
                 event = "doj:casinoinsideTrackHeader"
@@ -115,13 +115,13 @@ end
 RegisterNetEvent('QBCore:client:closeBetsNotEnough')
 AddEventHandler('QBCore:client:closeBetsNotEnough', function()
     closeHorseBets()
-    QBCore.Functions.Notify("Bets Closed! You dont have enough Red Casino Chips...", "error", 3500)
+    QBCore.Functions.Notify("Spil lukket! Du har ikke nok røde kasinochips...", "error", 3500)
 end)
 
 RegisterNetEvent('QBCore:client:closeBetsZeroChips')
 AddEventHandler('QBCore:client:closeBetsZeroChips', function()
     closeHorseBets()
-    QBCore.Functions.Notify("Bets Closed! You dont have any Red Casino Chips...", "error", 3500)
+    QBCore.Functions.Notify("Spil lukket! Du har ingen røde kasinochips...", "error", 3500)
 end)
 
 
@@ -132,7 +132,7 @@ AddEventHandler('QBCore:client:openInsideTrack', function()
         if HasItem then
             OpenInsideTrack()
         else
-            QBCore.Functions.Notify('You are not a member of the casino', 'error', 3500)
+            QBCore.Functions.Notify('Du er ikke medlem af kasinoet', 'error', 3500)
         end
     end, "casino_member")
 end)

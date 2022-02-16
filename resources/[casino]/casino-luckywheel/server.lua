@@ -20,14 +20,14 @@ RegisterNetEvent('luckywheel:getwheel', function()
 		if result == '0' then
 			TriggerEvent("luckywheel:startwheel", Player, src)
 		else
-			TriggerClientEvent('QBCore:Notify', src, "You have already had a spin on the wheel today", "error")
+			TriggerClientEvent('QBCore:Notify', src, "Du har allerede haft et spin på hjulet i dag", "error")
 		end
 	elseif Config.LimitedSpins == false then
 		if Player.PlayerData.money["bank"] >= Config.startingPrice then
 			Player.Functions.RemoveMoney("bank", tonumber(Config.startingPrice), "lucky-wheel")
 			TriggerEvent("luckywheel:startwheel", Player, src)
 		else
-			return TriggerClientEvent('QBCore:Notify', src, "You have enough in the bank to spin", "error")
+			return TriggerClientEvent('QBCore:Notify', src, "Du har ikke nok i banken til at spinde", "error")
 		end
 	end
 end)
@@ -64,16 +64,16 @@ RegisterNetEvent('luckywheel:give', function(source, price)
 	elseif price.type == 'item' then
 		TriggerClientEvent("chCasinoWall:bigWin", source)
 		Player.Functions.AddItem(price.name, price.count, slot, {["quality"] = 100})
-		TriggerClientEvent('QBCore:Notify', source, "Congratulations! You won "..price.count.." "..price.name.."!", 'success')
+		TriggerClientEvent('QBCore:Notify', source, "Tillykke! Du vandt "..price.count.." "..price.name.."!", 'success')
 		TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items[price.name], "add",price.count )
 	elseif price.type == 'money' then
 		TriggerClientEvent("chCasinoWall:bigWin", source)
 		Player.Functions.AddMoney('bank', tonumber(price.count), 'banking-quick-depo')
-		TriggerClientEvent('QBCore:Notify', source, "Congratulations! You won $"..price.count, 'success')
+		TriggerClientEvent('QBCore:Notify', source, "Tillykke! Du vandt $"..price.count, 'success')
 	elseif price.type == 'weapon' then
 		TriggerClientEvent("chCasinoWall:bigWin", source)
 		Player.Functions.AddItem(price.name, 1, slot, {["quality"] = 100})
-		TriggerClientEvent('QBCore:Notify', source, "Congratulations! You won a Pistol!", 'success')
+		TriggerClientEvent('QBCore:Notify', source, "Tillykke! Du vandten pistol!", 'success')
 		TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items[price.name], "add",1)
 	end
 	TriggerClientEvent("luckywheel:rollFinished", -1)

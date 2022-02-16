@@ -265,16 +265,16 @@ RegisterNetEvent("doj:client:startingBets", function(args)
         if args == 1 then 
             -- -- print("Bet raised")
             TriggerEvent("doj:client:openBetMenu")
-            QBCore.Functions.Notify('Bet raised', 'success')
+            QBCore.Functions.Notify('Indsats hævet', 'success')
             currentBetAmount = currentBetAmount + 100
         elseif args == 2 then 
             -- -- print("Bet lowered")
             TriggerEvent("doj:client:openBetMenu")
-            QBCore.Functions.Notify("Bet lowered", 'primary')
+            QBCore.Functions.Notify("Indsats sænket", 'primary')
             if currentBetAmount >= 100 then 
                 currentBetAmount = currentBetAmount - 100
             else
-                QBCore.Functions.Notify("Cannot bet below zero", "error", 3500)
+                QBCore.Functions.Notify("Kan ikke satse under nul", "error", 3500)
             end
         elseif args == 3 then 
             -- -- print("submitting bet")
@@ -285,11 +285,11 @@ RegisterNetEvent("doj:client:startingBets", function(args)
                 putBetOnTable()
                 Wait(1000)
             else
-                QBCore.Functions.Notify("Invalid amount.", "error", 3500)
+                QBCore.Functions.Notify("Ugyldigt beløb.", "error", 3500)
             end
         elseif args == 4 then 
             -- -- print("custom bet")
-            local tmpInput = getGenericTextInput("Bet Amount")
+            local tmpInput = getGenericTextInput("Indsatsbeløb")
             if tonumber(tmpInput) then
                 tmpInput = tonumber(tmpInput) 
                 if tmpInput > 0 then
@@ -327,7 +327,7 @@ RegisterNetEvent('doj:client:hit&standMenu', function()
         },
         {
             header = "Hit", 
-            txt = "Draw another card",
+            txt = "Træk endnu et kort",
             params = {
                 event = "doj:client:hit&standActions",
                 args = 1
@@ -335,7 +335,7 @@ RegisterNetEvent('doj:client:hit&standMenu', function()
         },
         {
             header = "Stand", 
-            txt = "Be a pussy",
+            txt = "Vær en svans",
             params = {
                 event = "doj:client:hit&standActions",
                 args = 2
@@ -401,14 +401,14 @@ CreateThread(function()
         if not sittingAtBlackjackTable then
             if closestChair ~= nil and closestChairDist < 1.3 then
                 inZone  = true
-                text = "<b>Diamond Casino Blackjack</b></p>Press [E] to sit"
+                text = "<b>Diamond Casino Blackjack</b></p>Klik på [E] for at sidde"
                 if not timeoutHowToBlackjack then
                     if IsControlJustPressed(0, 38) then
                         if blackjackTableData[closestChair] == false then
                             print("calling goToBlackjackSeat with chairID: " .. tostring(closestChair))
                             TriggerServerEvent("Blackjack:requestSitAtBlackjackTable",closestChair) 
                         else 
-                            QBCore.Functions.Notify("This seat is taken.", "error", 3500)
+                            QBCore.Functions.Notify("Dette sæde er optaget!.", "error", 3500)
                         end
                     end
                 end
@@ -452,10 +452,10 @@ CreateThread(function()
             -- QBCore.Functions.TriggerCallback('BLACKJACK:server:blackChipsAmount', function(result)
             --     exports['casinoUi']:DrawCasinoUi('show', "Diamond Casino Blackjack</p>Game Starting in: "..tostring(timeLeft).."s</p>Current Bet: "..tostring(currentBetAmount).."</p>Availble chips: "..tostring(result))   
 	        -- end) 
-            exports['casinoUi']:DrawCasinoUi('show', "Diamond Casino Blackjack</p>Game Starting in: "..tostring(timeLeft).."s</p>Current Bet: "..tostring(currentBetAmount))  
+            exports['casinoUi']:DrawCasinoUi('show', "Diamond Casino Blackjack</p>spillet starter om: "..tostring(timeLeft).."s</p>Nuværende indsats: "..tostring(currentBetAmount))  
         end
         if drawCurrentHand then
-            exports['textUi']:DrawTextUi('show', "Your hand: "..tostring(currentHand).."</p>Dealers Hand: "..tostring(dealersHand))  
+            exports['textUi']:DrawTextUi('show', "Din hånd: "..tostring(currentHand).."</p>Dealers hånd: "..tostring(dealersHand))  
         end
         Wait(500)
     end
@@ -474,7 +474,7 @@ AddEventHandler("Blackjack:beginBetsBlackjack",function(gameID,tableId)
     -- blackjackInstructional = setupBlackjackInstructionalScaleform("instructional_buttons")
     exports['textUi']:HideTextUi('hide')
     TriggerEvent("doj:client:openBetMenu")
-    QBCore.Functions.Notify("Place your bets", 'primary', 3500)
+    QBCore.Functions.Notify("Placer dine indsatser", 'primary', 3500)
     bettedThisRound = false
     drawTimerBar = true
     drawCurrentHand = false
@@ -588,7 +588,7 @@ AddEventHandler("Blackjack:standOrHit",function(gameId,chairId,nextCardCount,tab
                     waitingForStandOrHitState = false
                     TriggerServerEvent("Blackjack:standBlackjack",globalGameId,globalNextCardCount)
                     declineCard()
-                    QBCore.Functions.Notify("Failed to stand/hit in time, standing.", 'error', 3500)
+                    QBCore.Functions.Notify("Kunne ikke stå/slå i tide, står.", 'error', 3500)
                 end
             end)
         else 

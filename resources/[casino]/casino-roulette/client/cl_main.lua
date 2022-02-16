@@ -129,7 +129,7 @@ createRulettAsztal = function(index, data)
                     if IsDisabledControlPressed(0, 172) then
                         currentBetAmount = currentBetAmount + 10
                         changeBetAmount(currentBetAmount)
-                        QBCore.Functions.Notify('+'..currentBetAmount.." bet [raised]",'success')
+                        QBCore.Functions.Notify('+'..currentBetAmount.." Indsats [hævet]",'success')
 
                     elseif IsDisabledControlPressed(0, 173) then
                         if currentBetAmount > 0 then
@@ -139,7 +139,7 @@ createRulettAsztal = function(index, data)
                                 currentBetAmount = 0
                             end
                             changeBetAmount(currentBetAmount)
-                            QBCore.Functions.Notify('-'..currentBetAmount.." bet [lowered]",'primary')
+                            QBCore.Functions.Notify('-'..currentBetAmount.." Indsats [sænket]",'primary')
 
                         end
                     end
@@ -159,12 +159,12 @@ createRulettAsztal = function(index, data)
 
                     if Config.allowCustomBet then
                         if IsDisabledControlJustPressed(0, 22) then --Custom Bet [space]
-                            local tmpInput = getGenericTextInput('How many chips you would like to bet?')
+                            local tmpInput = getGenericTextInput('Hvor mange jetoner vil du gerne satse?')
                             if tonumber(tmpInput) then
                                 tmpInput = tonumber(tmpInput)
                                 if tmpInput > 0 then
                                     changeBetAmount(tmpInput)
-                                    QBCore.Functions.Notify('Custom Bet: '..currentBetAmount..' chips','success')
+                                    QBCore.Functions.Notify('Brugerdefineret indsats: '..currentBetAmount..' chips','success')
                                 end
                             end
                         end
@@ -599,12 +599,12 @@ createRulettAsztal = function(index, data)
                                                     PlaySoundFrontend(-1, 'DLC_VW_BET_DOWN', 'dlc_vw_table_games_frontend_sounds', true)
                                                     TriggerServerEvent('casino:taskBetRulett', selectedRulett, aimingAtBet, currentBetAmount)
                                                 else
-                                                    QBCore.Functions.Notify('Your bet it too low or too high for this table.','error')
+                                                    QBCore.Functions.Notify('Du satser for lavt eller for højt til dette bord.','error')
 
                                                 end
                                             end
                                         else
-                                            QBCore.Functions.Notify('Bet needs to be raised','error')
+                                            QBCore.Functions.Notify('Indsatsen skal hæves','error')
                                         end
                                     end
                                 end
@@ -807,7 +807,7 @@ CreateThread(function()
                     local dist = Vdist(playerpos, objcoords)
                     if dist < 2.4 then
                         if dist < 2.3 then
-                            exports['textUi']:DrawTextUi('show',"Diamond Casino Roulette</p>Press [E] to sit down")
+                            exports['textUi']:DrawTextUi('show',"Diamond Casino Roulette</p>Klik på [E] for at sidde ned")
                             local closestChairData = getClosestChairData(v.tableObject)
 
                             if closestChairData == nil then
@@ -818,7 +818,7 @@ CreateThread(function()
                                     if HasItem then
                                         TriggerServerEvent('server_remote:rulett:taskSitDown', k, closestChairData)
                                 	else
-							            QBCore.Functions.Notify('You are not a member of the casino', 'error', 3500)
+							            QBCore.Functions.Notify('Du er ikke medlem af kasinoet', 'error', 3500)
 						            end
 					            end, 'casino_member')
                             end
@@ -917,11 +917,11 @@ function casinoNuiUpdateGame(rulettIndex, ido, statusz)
         retval = result
         if selectedRulett == rulettIndex then
             if not statusz then
-                exports['casinoUi']:DrawCasinoUi('show', "Diamond Casino Blackjack</p>"..ido.." Seconds Left</p>Current Bet: "..currentBetAmount.." chips</p>Availble chips: "..retval)
+                exports['casinoUi']:DrawCasinoUi('show', "Diamond Casino Blackjack</p>"..ido.." Sekunder tilbage</p>Nuværende indsats: "..currentBetAmount.." chips</p>Tilgængelige chips: "..retval)
                 if Config.allowCustomBet then
-                    exports['textUi']:DrawTextUi('show', "Adjust Bet: <strong>↑/↓</strong></p>LEFT CLICK: Bet number</p>SPACEBAR: Custom Amount</p>E: Change camera</p>ESC: Exit")
+                    exports['textUi']:DrawTextUi('show', "Juster indsats: <strong>↑/↓</strong></p>VENSTRE KLIK: Indsats nummer</p>SPACEBAR: Brugerdefineret beløb</p>E: Skift kamera vinkel</p>ESC: forlad")
                 else
-                    exports['textUi']:DrawTextUi('show', "Adjust Bet: <strong>↑/↓</strong></p>LEFT CLICK: Bet number</p>E: Change camera</p>ESC: Exit")
+                    exports['textUi']:DrawTextUi('show', "Juster indsats: <strong>↑/↓</strong></p>VENSTRE KLIK: Indsats nummer</p>E: Skift kamera vinkel</p>ESC: forlad")
                 end
             else
                 exports['textUi']:DrawTextUi('show', "The game is starting..") 

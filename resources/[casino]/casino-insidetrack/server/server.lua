@@ -25,7 +25,7 @@ RegisterServerEvent("insidetrack:server:placebet", function(bet)
         if Chips.amount >= bet then
             Player.Functions.RemoveItem("casino_redchip", bet)
             TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items['casino_redchip'], "remove", bet)
-            TriggerClientEvent('QBCore:Notify', src, "You placed a "..bet.." red casino chips bet")
+            TriggerClientEvent('QBCore:Notify', src, "Du placerede "..bet.." røde casino chips")
         else
             return TriggerClientEvent('QBCore:client:closeBetsNotEnough', src)
         end
@@ -40,9 +40,9 @@ RegisterServerEvent("insidetrack:server:winnings", function(amount)
     if Player ~= nil then
         if Player.Functions.AddItem('casino_redchip', amount, nil, {["quality"] = 100}) then
             TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["casino_redchip"], "add", amount)
-            TriggerClientEvent('QBCore:Notify', src, "You Won "..amount.." red casino chips!")
+            TriggerClientEvent('QBCore:Notify', src, "Du vandt "..amount.." røde kasinochips!")
         else
-            TriggerClientEvent('QBCore:Notify', src, 'You have to much in your pockets', 'error')
+            TriggerClientEvent('QBCore:Notify', src, 'Du har for meget i lommerne', 'error')
         end
     end
 end) 
